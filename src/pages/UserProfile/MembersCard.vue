@@ -2,19 +2,19 @@
     <card class="card" :title="title">
         <div>
             <ul class="list-unstyled team-members">
-                <li>
-                    <div class="row" v-for="member in members" :key="member.name">
+                <li v-for="member in members" :key="member.name">
+                    <div class="row">
                         <div class="col-3">
                             <div class="avatar">
-                                <img :src="member.image" alt="Circle Image" class="rounded img-fluid">
+                                <img :src="member.image" alt="Circle Image" class="img-circle img-no-padding img-responsive">
                             </div>
                         </div>
                         <div class="col-6">
                             {{ member.name }}
                             <br>
                             <span :class="getStatusClass(member.status)">
-                <small>{{ member.status }}</small>
-              </span>
+                                <small>{{ member.status }}</small>
+                            </span>
                         </div>
 
                         <div class="col-3">

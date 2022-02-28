@@ -7,7 +7,7 @@
                     <p class="card-category">Handcrafted by our friends from
                         <a target="_blank" href="https://themify.me/">Themify</a>.</p>
                 </template>
-                <div class="content all-icons">
+                <div class="card-content all-icons">
 
                     <div class="icon-section">
                         <h3>Arrows &amp; Direction Icons </h3>

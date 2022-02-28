@@ -4,9 +4,6 @@
             <user-card>
 
             </user-card>
-            <members-card>
-
-            </members-card>
         </div>
         <div class="col-xl-8 col-lg-7 col-md-6">
             <edit-profile-form>

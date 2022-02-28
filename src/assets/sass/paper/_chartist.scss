@@ -36,7 +36,7 @@
   -ms-flex-pack: $ct-text-justify;
   justify-content: $ct-text-justify;
   // Fallback to text-align for non-flex browsers
-  @if ($ct-text-justify == 'flex-start') {
+  @if($ct-text-justify == 'flex-start') {
     text-align: left;
   } @else if ($ct-text-justify == 'flex-end') {
     text-align: right;
@@ -227,4 +227,20 @@
       }
     }
   }
+}
+
+.ct-blue{
+  stroke: $primary-color !important;
+}
+.ct-azure{
+  stroke: $info-color !important;
+}
+.ct-green{
+  stroke: $success-color !important;
+}
+.ct-orange{
+  stroke: $warning-color !important;
+}
+.ct-red{
+  stroke: $danger-color !important;
 }

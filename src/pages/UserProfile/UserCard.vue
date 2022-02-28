@@ -1,6 +1,6 @@
 <template>
     <card class="card-user">
-        <div slot="image">
+        <div slot="image" class="image">
             <img src="@/assets/img/background.jpg" alt="...">
         </div>
         <div>
@@ -56,11 +56,11 @@ export default {
         getClasses(index) {
             var remainder = index % 3;
             if (remainder === 0) {
-                return "col-lg-3 offset-lg-1";
+                return "col-md-3 offset-md-1";
             } else if (remainder === 2) {
-                return "col-lg-4";
+                return "col-md-4";
             } else {
-                return "col-lg-3";
+                return "col-md-3";
             }
         }
     }

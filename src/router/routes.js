@@ -4,9 +4,10 @@ import NotFound from "@/pages/NotFoundPage.vue";
 
 // Admin pages
 import Dashboard from "@/pages/Dashboard.vue";
+import AuthLogin from "@/pages/Auth/Login.vue";
 // import UserProfile from "@/pages/UserProfile.vue";
-// import Notifications from "@/pages/Notifications.vue";
-// import Icons from "@/pages/Icons.vue";
+import Notifications from "@/pages/Notifications.vue";
+import Icons from "@/pages/Icons.vue";
 // import Maps from "@/pages/Maps.vue";
 // import Typography from "@/pages/Typography.vue";
 // import TableList from "@/pages/TableList.vue";
@@ -24,10 +25,32 @@ const baseRoutes = [
                 name: "dashboard",
                 component: Dashboard,
                 meta: {title: 'Dasboard', icon: 'ti-panel', affix: true, requiresAuth: true, roles: ['user']}
-            }
+            },
+            {
+                path: "notifications",
+                name: "notifications",
+                component: Notifications,
+                meta: {title: 'Notifications', icon: 'ti-announcement', affix: true, requiresAuth: true, roles: ['user']}
+            },
+            {
+                path: "icons",
+                name: "icons",
+                component: Icons,
+                meta: {title: 'Icons', icon: 'ti-themify-favicon-alt', affix: true, requiresAuth: true, roles: ['admin']}
+            },
         ]
     },
-    {path: "*", component: NotFound},
+    {
+        path: "/auth/login",
+        name: "login",
+        component: AuthLogin,
+        meta: {title: 'Login', requiresAuth: false}
+    },
+    {
+        path: "*", 
+        component: NotFound,
+        meta: {title: 'Not Found'}
+    },
 ];
 
 const routes = baseRoutes.concat(

@@ -1,16 +1,20 @@
 <template>
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <nav class="navbar navbar-default">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">{{ routeName }}</a>
-            <button class="navbar-toggler navbar-burger"
-                    type="button"
-                    @click="toggleSidebar"
-                    :aria-expanded="$sidebar.showSidebar"
-                    aria-label="Toggle navigation">
-                <span class="navbar-toggler-bar"></span>
-                <span class="navbar-toggler-bar"></span>
-                <span class="navbar-toggler-bar"></span>
-            </button>
+            <div class="navbar-minimize">
+                <button class="btn btn-fill btn-icon" @click="minimizeSidebar">
+                    <i :class="$sidebar.isMinimized ? 'ti-menu-alt' : 'ti-more-alt'"></i>
+                </button>
+            </div>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" :class="{toggled: $sidebar.showSidebar}" @click="toggleSidebar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar bar1"></span>
+                    <span class="icon-bar bar2"></span>
+                    <span class="icon-bar bar3"></span>
+                </button>
+                <a class="navbar-brand">{{this.$route.meta.title || 'Title Goes Here' }}</a>
+            </div>
         </div>
     </nav>
 </template>
@@ -43,6 +47,9 @@ export default {
         },
         hideSidebar() {
             this.$sidebar.displaySidebar(false);
+        },
+        minimizeSidebar () {
+            this.$sidebar.toggleMinimize(this.$store);
         }
     }
 };

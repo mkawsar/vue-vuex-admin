@@ -64,13 +64,6 @@ export default {
                         this.routes.push(obj);
                     }
                 }
-                // if (routeRoles.indexOf(roles) > -1) {
-                //     this.routes.push(route)
-                // }
-                // console.log(routeRoles.roles);
-                // const intersection = roles.filter(e => routeRoles.indexOf(e) !== -1);
-                // console.log(intersection);
-                
             }
         });
     }

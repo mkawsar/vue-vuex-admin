@@ -33,9 +33,6 @@ button:focus {
   outline: 0 !important;
 }
 
-.navbar.navbar-default {
-  z-index: 2;
-}
 
 /*           Animations              */
 .form-control,
@@ -46,8 +43,17 @@ button:focus {
   @include transition($general-transition-time, $transition-linear);
 }
 
+
 .sidebar .nav a,
-.table > tbody > tr .td-actions .btn {
+.sidebar .nav .collapse i,
+.sidebar .nav .collapse a > span,
+.sidebar .sidebar-wrapper > .nav p,
+.sidebar .user .info > a > span,
+.sidebar .user .info .collapse .nav a > span,
+.sidebar .logo a.logo-mini,
+.sidebar .logo a.logo-normal,
+.table > tbody > tr .td-actions .btn,
+.caret{
   @include transition($fast-transition-time, $transition-ease-in);
 }
 
@@ -157,3 +163,13 @@ hr {
   text-align: center;
 }
 
+.animation-transition-general{
+  @include transition($general-transition-time, $transition-linear);
+}
+
+.animation-transition-fast{
+  @include transition($fast-transition-time, $transition-linear);
+}
+.animation-transition-ultra-fast{
+  @include transition($ultra-fast-transition-time, $transition-ease-in);
+}

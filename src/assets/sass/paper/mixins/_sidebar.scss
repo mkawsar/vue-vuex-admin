@@ -4,6 +4,10 @@
     background-color: $background-color;
   }
 
+  #style-3 {
+    overflow-y: auto !important;
+    overflow-x: hidden;
+  }
   #style-3::-webkit-scrollbar-track
   {
     -webkit-box-shadow: inset 0 0 6px $background-color;
@@ -23,7 +27,10 @@
 
 
   .logo {
-    border-bottom: 1px solid rgba($font-color, .3);
+    &:before {
+      background-color: rgba($font-color, .3);
+    }
+
 
     p {
       color: $font-color;
@@ -35,8 +42,8 @@
   }
 
   .nav {
-    .nav-item:not(.active) {
-      > .nav-link {
+    li:not(.active) {
+      > a {
         color: $font-color;
       }
     }
@@ -50,8 +57,8 @@
 
 @mixin sidebar-active-color($font-color) {
   .nav {
-    .nav-item {
-      &.active > .nav-link {
+    li {
+      &.active > a {
         color: $font-color;
         opacity: 1;
       }
