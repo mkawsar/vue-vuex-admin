@@ -2,39 +2,14 @@
     <div class="wrapper">
         <side-bar>
             <template slot="links">
-                <sidebar-link to="/dashboard" name="Dashboard" icon="ti-panel"/>
-                <sidebar-link to="/stats" name="User Profile" icon="ti-user"/>
+                <sidebar-link v-for="(route, index) in routes" :key="`${index}`" :to="`${route.path}`" :name="`${route.name}`" :icon="`${route.icon}`"/>
+                <!-- <sidebar-link to="/stats" name="User Profile" icon="ti-user"/>
                 <sidebar-link to="/table-list" name="Table List" icon="ti-view-list-alt"/>
                 <sidebar-link to="/typography" name="Typography" icon="ti-text"/>
                 <sidebar-link to="/icons" name="Icons" icon="ti-pencil-alt2"/>
                 <sidebar-link to="/maps" name="Map" icon="ti-map"/>
-                <sidebar-link to="/notifications" name="Notifications" icon="ti-bell"/>
+                <sidebar-link to="/notifications" name="Notifications" icon="ti-bell"/> -->
             </template>
-            <mobile-menu>
-                <li class="nav-item">
-                    <a class="nav-link">
-                        <i class="ti-panel"></i>
-                        <p>Stats</p>
-                    </a>
-                </li>
-                <drop-down class="nav-item"
-                           title="5 Notifications"
-                           title-classes="nav-link"
-                           icon="ti-bell">
-                    <a class="dropdown-item">Notification 1</a>
-                    <a class="dropdown-item">Notification 2</a>
-                    <a class="dropdown-item">Notification 3</a>
-                    <a class="dropdown-item">Notification 4</a>
-                    <a class="dropdown-item">Another notification</a>
-                </drop-down>
-                <li class="nav-item">
-                    <a class="nav-link">
-                        <i class="ti-settings"></i>
-                        <p>Settings</p>
-                    </a>
-                </li>
-                <li class="divider"></li>
-            </mobile-menu>
         </side-bar>
         <div class="main-panel">
             <top-navbar></top-navbar>
@@ -56,6 +31,11 @@ import DashboardContent from "./Content.vue";
 import MobileMenu from "./MobileMenu";
 
 export default {
+    data() {
+        return {
+            routes: []
+        }
+    },
     components: {
         TopNavbar,
         ContentFooter,
@@ -68,6 +48,31 @@ export default {
                 this.$sidebar.displaySidebar(false);
             }
         }
+    },
+    created() {
+        let roles = this.$localStorage.get('roles');
+        this.$router.getRoutes().forEach(route => {
+            if (Object.keys(route.meta).length > 0 && route.meta['requiresAuth'] == true) {
+                let routeRoles = route.meta;
+                if (routeRoles.hasOwnProperty('roles') && routeRoles['roles'] !== 'undefined') {
+                    const intersection = roles.filter(element => routeRoles['roles'].indexOf(element) !== -1);
+                    if (intersection.length > 0) {
+                        let obj = {};
+                        obj.name = route.meta.title;
+                        obj.icon = route.meta.icon;
+                        obj.path = route.path;
+                        this.routes.push(obj);
+                    }
+                }
+                // if (routeRoles.indexOf(roles) > -1) {
+                //     this.routes.push(route)
+                // }
+                // console.log(routeRoles.roles);
+                // const intersection = roles.filter(e => routeRoles.indexOf(e) !== -1);
+                // console.log(intersection);
+                
+            }
+        });
     }
 };
 </script>
