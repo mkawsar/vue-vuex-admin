@@ -1,4 +1,6 @@
-import Vue from 'vue';
+import {
+    postRequest
+} from '@/config/axios.client.js';
 export default {
     namespaced: true,
     state: () => ({
@@ -24,8 +26,20 @@ export default {
 
     actions: {
         handleAuthLogin({ commit }, user) {
-            commit('setSuccessStatus', true);
-            commit('setMessage', 'Successfully logged in!');
+            try {
+                commit('setSuccessStatus', true);
+                commit('setMessage', 'Successfully logged in!');
+                const response = postRequest('login', user);
+                response.then(res => {
+                    console.log('test');
+                }).catch(err => {
+                    console.log(err);
+                })
+
+                // console.log(response);
+            } catch (err) {
+                console.log(err.response.data.message);
+            }
         }
     }
 }

@@ -104,11 +104,11 @@ export default {
         ...mapActions(['handleAuthLogin']),
         handleLogin () {
             this.$validator.validateAll().then(isValid => {
-                let obj = {
-                    password: this.user.password,
-                    email: this.user.email
-                }
                 if (isValid) {
+                    let obj = {
+                        password: this.user.password,
+                        email: this.user.email
+                    };
                     this.handleAuthLogin(obj);
                 }
             });
