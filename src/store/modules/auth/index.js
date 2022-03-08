@@ -1,18 +1,21 @@
 import {
-    postRequest
+    postRequest, getRequest
 } from '@/config/axios.client.js';
+import localStorage from '../../../services/localStorage/localStorage';
 export default {
     namespaced: true,
     state: () => ({
         email: '',
         password: '',
         success: false,
-        message: ''
+        message: '',
+        error: false
     }),
 
     getters: {
         getSuccessStatus: state => state.success,
-        getMessage: state => state.message
+        getMessage: state => state.message,
+        getErrorStatus: state => state.error
     },
 
     mutations: {
@@ -21,25 +24,27 @@ export default {
         },
         setMessage(state, message) {
             state.message = message;
+        },
+        setErrorStatus(state, status) {
+            state.error = status;
         }
     },
 
     actions: {
         handleAuthLogin({ commit }, user) {
-            try {
+            const response = postRequest('api/v1/employer/login', user);
+            response.then(res => {
+                let userRole = [];
+                userRole.push(res.data.response.user.role.name);
+                localStorage.set('roles', userRole);
+                localStorage.set('token', res.data.response.token);
+            }).finally(() => {
                 commit('setSuccessStatus', true);
                 commit('setMessage', 'Successfully logged in!');
-                const response = postRequest('login', user);
-                response.then(res => {
-                    console.log('test');
-                }).catch(err => {
-                    console.log(err);
-                })
-
-                // console.log(response);
-            } catch (err) {
-                console.log(err.response.data.message);
-            }
+            }).catch(err => {
+                commit('setErrorStatus', true);
+                commit('setMessage', err.response.data.error);
+            });
         }
     }
 }

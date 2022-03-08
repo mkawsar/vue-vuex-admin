@@ -24,7 +24,7 @@ const baseRoutes = [
                 path: "dashboard",
                 name: "dashboard",
                 component: Dashboard,
-                meta: {title: 'Dasboard', icon: 'ti-panel', affix: true, requiresAuth: true, roles: ['user']}
+                meta: {title: 'Dasboard', icon: 'ti-panel', affix: true, requiresAuth: true, roles: ['user', 'employer']}
             },
             {
                 path: "notifications",

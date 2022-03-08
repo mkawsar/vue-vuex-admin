@@ -6,13 +6,13 @@ export default {
 
     error($this, title, text) {
         let template = '<span><b>' + title + '</b> - ' + text + '</span>';
-        this.notifyText($this, 'top', 'right', template, 'ti-info-alt', 'danger');
+        this.notifyTemplate($this, 'top', 'right', template, 'ti-info-alt', 'danger');
     },
 
     notifyValidationErrors($this, notifications) {
         if (typeof notifications === 'string') {
             let template = '<span><b>' + title + '</b> - ' + text + '</span>';
-            this.notifyText($this, 'top', 'right', template, 'ti-info-alt', 'danger');
+            this.notifyTemplate($this, 'top', 'right', template, 'ti-info-alt', 'danger');
         } else if (notifications.constructor === Array) {
             let template = '<ul style="list-style-type: disc">';
             for (let key in notifications) {
@@ -21,7 +21,7 @@ export default {
                 }
             }
             template += '</ul>';
-            this.notifyText($this, 'top', 'right', template, 'ti-info-alt', 'danger');
+            this.notifyTemplate($this, 'top', 'right', template, 'ti-info-alt', 'danger');
         }
 
     },
@@ -30,7 +30,7 @@ export default {
         if (notifications.hasOwnProperty('message')) {
             if (typeof notifications.message === 'string') {
                 let template = '<span><b>Oops!</b> - ' + notifications.message + '</span>';
-                this.notifyText($this, 'top', 'right', template, 'ti-info-alt', 'danger');
+                this.notifyTemplate($this, 'top', 'right', template, 'ti-info-alt', 'danger');
             } else if (typeof notifications.message === 'object') {
                 let template = '<ul>';
                 for (let key in notifications.message) {
@@ -39,7 +39,7 @@ export default {
                     }
                 }
                 template += '</ul>';
-                this.notifyText($this, 'top', 'right', template, 'ti-info-alt', 'danger');
+                this.notifyTemplate($this, 'top', 'right', template, 'ti-info-alt', 'danger');
             }
         }
     },

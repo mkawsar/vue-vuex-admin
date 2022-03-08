@@ -105,11 +105,10 @@ export default {
         handleLogin () {
             this.$validator.validateAll().then(isValid => {
                 if (isValid) {
-                    let obj = {
-                        password: this.user.password,
-                        email: this.user.email
-                    };
-                    this.handleAuthLogin(obj);
+                    let formData = new FormData();
+                    formData.append('email', this.user.email);
+                    formData.append('password', this.user.password);
+                    this.handleAuthLogin(formData);
                 }
             });
         }
@@ -117,13 +116,20 @@ export default {
     computed: {
         ...mapGetters([
             'getSuccessStatus',
-            'getMessage'
+            'getMessage',
+            'getErrorStatus'
         ]),
     },
     watch: {
         getSuccessStatus(value) {
            if (value) {
                this.$notification.notify(this, 'Success', this.getMessage);
+               this.$router.push('/dashboard');
+           }
+        },
+        getErrorStatus(value) {
+           if (value) {
+               this.$notification.error(this, 'Error', this.getMessage);
            }
         }
     }
