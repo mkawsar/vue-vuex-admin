@@ -12,7 +12,7 @@ export function getCustomRequest(url) {
 }
 
 export function getRequest(url) {
-    return axiosClient.get(`/${url}`).then(response => response.data).catch(error => error);
+    return axiosClient.get(`/${url}`).then(response => response.data);
 }
 
 export function postRequest(url, payload) {

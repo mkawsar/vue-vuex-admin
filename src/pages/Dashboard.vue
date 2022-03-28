@@ -33,7 +33,7 @@
 <script>
 import { createNamespacedHelpers } from 'vuex';
 
-const {mapGetters, mapActions} = createNamespacedHelpers('users');
+const {mapGetters, mapActions} = createNamespacedHelpers('dashboard');
 
 export default {
     name: 'dashboard',
@@ -79,23 +79,25 @@ export default {
         };
     },
     mounted() {
-        //this.getUserList();
+        this.handleGetUserInfo();
     },
     methods: {
-        ...mapActions(['handleAdduser']),
-        handleCheckoutSaveButton() {
-            let obj = {
-                id: 2,
-                name: 'test',
-                email: 'test@example.com'
-            }
-            this.handleAdduser(obj);
-        }
+        ...mapActions(['handleGetUserInfo']),
     },
     computed: {
         ...mapGetters([
-            'getUserList'
+            'getIsLoggedIn',
+            'getMessage'
         ]),
+    },
+    watch: {
+        getIsLoggedIn(value) {
+            if (!value) {
+                this.$notification.error(this, 'Success', this.getMessage);
+                this.$localStorage.clear();
+                this.$router.push('/auth/login');
+            }
+        }
     }
 };
 </script>
