@@ -11,6 +11,6 @@ export default new Vuex.Store({
     namespaced: true,
     modules: {
         auth: authModule,
-        users: usersModule
+        user: usersModule
     }
 });

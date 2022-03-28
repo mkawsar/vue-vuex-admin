@@ -1,7 +1,7 @@
 import {
     postRequest, getRequest
 } from '@/config/axios.client.js';
-import localStorage from '../../../services/localStorage/localStorage';
+import localStorage from '@/services/localStorage/localStorage';
 export default {
     namespaced: true,
     state: () => ({
@@ -32,12 +32,15 @@ export default {
 
     actions: {
         handleAuthLogin({ commit }, user) {
-            const response = postRequest('api/v1/employer/login', user);
+            const response = postRequest('api/v1/login', user);
             response.then(res => {
                 let userRole = [];
-                userRole.push(res.data.response.user.role.name);
+                let roles = res.data.roles;
+                roles.forEach(role => {
+                    userRole.push(role.name);
+                });
                 localStorage.set('roles', userRole);
-                localStorage.set('token', res.data.response.token);
+                localStorage.set('token', res.data.token);
             }).finally(() => {
                 commit('setSuccessStatus', true);
                 commit('setMessage', 'Successfully logged in!');

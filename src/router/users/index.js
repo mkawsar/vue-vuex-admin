@@ -8,8 +8,8 @@ export default [
         redirect: "/dashboard",
         children: [
             {
-                path: "stats",
-                name: "stats",
+                path: "profile",
+                name: "profile",
                 component: UserProfile,
                 meta: {title: 'User Profile', icon: 'ti-user', affix: true, requiresAuth: true, roles: ['admin']}
             }

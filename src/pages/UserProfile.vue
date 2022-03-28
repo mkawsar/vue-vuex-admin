@@ -13,6 +13,9 @@
     </div>
 </template>
 <script>
+import { createNamespacedHelpers } from 'vuex';
+const {mapGetters, mapActions} = createNamespacedHelpers('user')
+
 import EditProfileForm from "./UserProfile/EditProfileForm.vue";
 import UserCard from "./UserProfile/UserCard.vue";
 import MembersCard from "./UserProfile/MembersCard.vue";
@@ -21,7 +24,21 @@ export default {
     components: {
         EditProfileForm,
         UserCard,
-        MembersCard
+        MembersCard,
+
+         ...mapGetters([
+             'getUserInfo'
+         ]),
+    },
+    methods: {
+        ...mapActions(['handleGetUserInfo']),
+
+        handleGetInit() {
+            this.handleGetUserInfo();
+        }
+    },
+    mounted() {
+        this.handleGetInit();
     }
 };
 </script>
