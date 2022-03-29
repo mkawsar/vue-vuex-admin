@@ -1,5 +1,7 @@
 import axios from 'axios';
 import constants from './constants';
+import swal from 'sweetalert2';
+import router from '../router';
 // axios client
 const axiosClient = axios.create({
     baseURL: constants.HOST_URL,
@@ -16,19 +18,27 @@ axiosClient.interceptors.request.use((config) => {
         config.headers["Authorization"] = "Bearer " + token
     }
     return config
-  })
+})
 
-axios.interceptors.response.use(function (response) {
+axiosClient.interceptors.response.use(function (response) {
     return response;
 }, function (error) {
     if (error.response.status === 401 && window.location.pathname !== '/auth/login') {
-        localStorage.clear()
-        app.$router.push('/auth/login');
-        return Promise.reject(error);
+        swal.fire({
+            type: 'error',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            title: 'Oops...',
+            text: error.response.data.data
+        }).then((result) => {
+            localStorage.clear()
+            router.push('/auth/login');
+            return Promise.reject(error);
+        });
     } else {
         if (error.response.status === 401) {
             localStorage.clear()
-            app.$router.push('/auth/login');
+            router.push('/auth/login');
             return Promise.reject(error);
         }
 

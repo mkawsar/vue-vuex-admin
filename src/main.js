@@ -13,13 +13,11 @@ import localStorage from "./services/localStorage";
 import PaperDashboard from "./plugins/paperDashboard";
 import "vue-notifyjs/themes/default.css";
 
-require('./bootstrap');
-
 Vue.use(VueNotify);
 Vue.use(PaperDashboard);
 Vue.use(store)
 
-Vue.prototype.$_ = _;
+Vue.prototype.$lodash = _;
 Vue.prototype.$auth = auth;
 Vue.prototype.$localStorage = localStorage;
 Vue.prototype.$notification = notification;

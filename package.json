@@ -31,6 +31,7 @@
         "lodash": "^4.17.21",
         "node-sass": "^7.0.1",
         "sass-loader": "^12.6.0",
+        "sweetalert2": "^11.4.7",
         "vee-validate": "^2.0.9",
         "vue-template-compiler": "^2.6.10"
     },

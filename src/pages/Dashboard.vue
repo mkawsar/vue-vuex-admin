@@ -79,7 +79,7 @@ export default {
         };
     },
     mounted() {
-        //this.handleGetUserInfo();
+        this.handleGetUserInfo();
     },
     methods: {
         ...mapActions(['handleGetUserInfo']),
