@@ -96,8 +96,6 @@ export default {
                 this.$notification.error(this, 'Success', this.getMessage);
                 this.$localStorage.clear();
                 this.$router.push('/auth/login');
-            } else {
-                this.handleGetUserInfo();
             }
         }
     }

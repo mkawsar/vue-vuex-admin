@@ -36,7 +36,6 @@ export default {
                 //TODO
             })
             .catch(err => {
-                console.log('err', err.response);
                 if (err.response.status === 401) {
                     commit('setMessage', err.response.data.data)
                     commit('seIsLoggedIn', false);

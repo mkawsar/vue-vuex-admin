@@ -1,20 +1,33 @@
 import axios from 'axios';
 import constants from './constants';
 // axios client
-const axiosClient = axios.create();
+const axiosClient = axios.create({
+    baseURL: constants.HOST_URL,
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    }
+});
 
-axiosClient.defaults.baseURL = constants.HOST_URL;
-axiosClient.defaults.headers = constants.headers;
+
+axiosClient.interceptors.request.use((config) => {
+    const token = localStorage.getItem('token');
+    if (token) {
+        config.headers["Authorization"] = "Bearer " + token
+    }
+    return config
+  })
+
 axios.interceptors.response.use(function (response) {
     return response;
 }, function (error) {
     if (error.response.status === 401 && window.location.pathname !== '/auth/login') {
-        AppLocalStorage.clear();
+        localStorage.clear()
         app.$router.push('/auth/login');
         return Promise.reject(error);
     } else {
         if (error.response.status === 401) {
-            AppLocalStorage.clear();
+            localStorage.clear()
             app.$router.push('/auth/login');
             return Promise.reject(error);
         }
