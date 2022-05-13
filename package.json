@@ -19,6 +19,7 @@
         "vue-clickaway": "^2.1.0",
         "vue-notifyjs": "^0.3.0",
         "vue-router": "^3.0.1",
+        "vuetable-2": "^2.0.0-beta.4",
         "vuex": "3.0.1"
     },
     "devDependencies": {
@@ -29,6 +30,7 @@
         "axios": "^0.26.0",
         "element-ui": "^2.15.6",
         "lodash": "^4.17.21",
+        "moment": "^2.29.3",
         "node-sass": "^7.0.1",
         "sass-loader": "^12.6.0",
         "sweetalert2": "^11.4.7",

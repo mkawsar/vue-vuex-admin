@@ -6,6 +6,8 @@ import App from "./App";
 import router from "./router/index";
 import store from './store/index';
 
+import env from './env'
+
 import auth from "./services/auth";
 import notification from "./services/notification";
 import localStorage from "./services/localStorage";
@@ -17,6 +19,8 @@ Vue.use(VueNotify);
 Vue.use(PaperDashboard);
 Vue.use(store)
 
+
+Vue.prototype.$env = env;
 Vue.prototype.$lodash = _;
 Vue.prototype.$auth = auth;
 Vue.prototype.$localStorage = localStorage;

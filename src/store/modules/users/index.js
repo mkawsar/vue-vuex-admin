@@ -1,4 +1,3 @@
-import localStorage from '@/services/localStorage/localStorage';
 import { postRequest, getRequest } from '@/config/axios.client.js';
 
 export default {

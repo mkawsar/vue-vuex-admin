@@ -13,16 +13,39 @@
                             </div>
                             <div class="col-xs-7">
                                 <div class="numbers">
-                                    <p>{{stats.title}}</p>
+                                    <p>{{ stats.title }}</p>
                                     {{ stats.value }}
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div class="card-footer">
-                        <hr />
+                        <hr/>
                         <div class="stats">
                             <i :class="stats.footerIcon"></i> {{ stats.footerText }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-sm-12">
+                <div class="card">
+                    <div class="card-content">
+                        <vuetable ref="vuetable"
+                                  :api-url="url"
+                                  :http-options="headerOptions"
+                                  :fields="fields"
+                                  :data="data"
+                                  pagination-path
+                                  @vuetable:pagination-data="onPaginationData">
+                        </vuetable>
+                        <div class="vuetable-pagination ui basic segment grid">
+                            <vuetable-pagination-info ref="paginationInfo"></vuetable-pagination-info>
+                            <vuetable-pagination ref="pagination"
+                                :css="css.pagination"
+                                @vuetable-pagination:change-page="onChangePage">
+                            </vuetable-pagination>
                         </div>
                     </div>
                 </div>
@@ -31,11 +54,20 @@
     </div>
 </template>
 <script>
+import moment from 'moment'
+import Vuetable from "vuetable-2";
 import { createNamespacedHelpers } from 'vuex';
+import VuetableCssConfig from '../components/Vuetable/VuetableCssConfig';
+import VuetablePagination from "vuetable-2/src/components/VuetablePagination";
+import VuetablePaginationInfo from "vuetable-2/src/components/VuetablePaginationInfo";
 
-const {mapGetters, mapActions} = createNamespacedHelpers('dashboard');
+const {mapGetters: mapGettersDashboardMoudle, mapActions: mapActionsDashboardModule} = createNamespacedHelpers('dashboard');
+const {mapGetters: mapGettersSurveyModule, mapActions: mapActionsSurveyModule} = createNamespacedHelpers('survey');
 
 export default {
+    components: {
+        Vuetable, VuetablePagination, VuetablePaginationInfo
+    },
     name: 'dashboard',
     /**
      * Chart data used to render stats, charts. Should be replaced with server data
@@ -75,20 +107,54 @@ export default {
                     footerText: "Updated now",
                     footerIcon: "ti-reload"
                 }
-            ]
+            ],
+            fields: [
+                {
+                    name: 'title',
+                    title: 'Title'
+                },
+                {
+                    name: 'slug',
+                    title: 'Slug'
+                },
+                {
+                    name: 'expire_date',
+                    title: 'Expire Date',
+                    callback: function(date) {
+                        return date + 'test';
+                    }
+                }
+            ],
+            data: [],
+            css: VuetableCssConfig,
+            url: this.$env.BACKEND_API + '/api/v1/survey',
+            headerOptions: {
+                headers: {
+                    Authorization: "Bearer " + localStorage.getItem("token")
+                }
+            }
         };
     },
     mounted() {
         this.handleGetUserInfo();
+        //this.handleGetSurveyList();
     },
     methods: {
-        ...mapActions(['handleGetUserInfo']),
+        ...mapActionsDashboardModule(['handleGetUserInfo']),
+        ...mapActionsSurveyModule(['handleGetSurveyList']),
+        onPaginationData(paginationData) {
+            console.log('paginationData',paginationData);
+            this.$refs.pagination.setPaginationData(paginationData);
+            this.$refs.paginationInfo.setPaginationData(paginationData);
+        },
+        onChangePage(page) {
+            console.log(page);
+            this.$refs.vuetable.changePage(page)
+        },
     },
     computed: {
-        ...mapGetters([
-            'getIsLoggedIn',
-            'getMessage'
-        ]),
+        ...mapGettersDashboardMoudle(['getIsLoggedIn', 'getMessage']),
+        ...mapGettersSurveyModule(['getSurveyList']),
     },
     watch: {
         getIsLoggedIn(value) {
@@ -96,6 +162,12 @@ export default {
                 this.$notification.error(this, 'Success', this.getMessage);
                 this.$localStorage.clear();
                 this.$router.push('/auth/login');
+            }
+        },
+        getSurveyList(data) {
+            if (data) {
+                console.log(data);
+                this.data = data
             }
         }
     }
