@@ -39,6 +39,18 @@
                                   :data="data"
                                   pagination-path
                                   @vuetable:pagination-data="onPaginationData">
+                            <template slot="actions" slot-scope='props'>
+                                <div class="custom-actions">
+                                    <button class="btn btn-simple btn-xs btn-danger btn-icon remove"
+                                        v-tooltip="{
+                                        content: 'Delete this Challenge',
+                                        placement: 'top-center',
+                                        classes: ['info'],
+                                        targetClasses: ['it-has-a-tooltip'],
+                                        offset: 10,}" v-on:click="handleSurveyDeleteAction(props.rowData.title, props.rowData.id)"><i class="ti-close"></i>
+                                    </button>
+                                </div>
+                            </template>
                         </vuetable>
                         <div class="vuetable-pagination ui basic segment grid">
                             <vuetable-pagination-info ref="paginationInfo"></vuetable-pagination-info>
@@ -54,10 +66,10 @@
     </div>
 </template>
 <script>
-import moment from 'moment'
 import Vuetable from "vuetable-2";
+import dateFormatMixins from '@/mixins/dateFormat';
 import { createNamespacedHelpers } from 'vuex';
-import VuetableCssConfig from '../components/Vuetable/VuetableCssConfig';
+import VuetableCssConfig from '@/components/Vuetable/VuetableCssConfig';
 import VuetablePagination from "vuetable-2/src/components/VuetablePagination";
 import VuetablePaginationInfo from "vuetable-2/src/components/VuetablePaginationInfo";
 
@@ -120,9 +132,13 @@ export default {
                 {
                     name: 'expire_date',
                     title: 'Expire Date',
-                    callback: function(date) {
-                        return date + 'test';
-                    }
+                    callback: 'formatDate|DD/MM/YYYY'
+                },
+                {
+                    name: '__slot:actions',
+                    title: 'Actions',
+                    titleClass: 'center aligned',
+                    dataClass: 'center aligned',
                 }
             ],
             data: [],
@@ -135,6 +151,7 @@ export default {
             }
         };
     },
+    mixins: [dateFormatMixins],
     mounted() {
         this.handleGetUserInfo();
         //this.handleGetSurveyList();
@@ -143,14 +160,23 @@ export default {
         ...mapActionsDashboardModule(['handleGetUserInfo']),
         ...mapActionsSurveyModule(['handleGetSurveyList']),
         onPaginationData(paginationData) {
-            console.log('paginationData',paginationData);
             this.$refs.pagination.setPaginationData(paginationData);
             this.$refs.paginationInfo.setPaginationData(paginationData);
         },
         onChangePage(page) {
-            console.log(page);
             this.$refs.vuetable.changePage(page)
         },
+        handleSurveyDeleteAction(title, id) {
+            this.$confirm('This will delete the survey "' + title + '". Continue?', 'Warning', {
+                    confirmButtonText: 'OK',
+                    cancelButtonText: 'Cancel',
+                    type: 'warning'
+                }).then(() => {
+                    console.log(id);
+                }).catch(() => {
+                    //this.$notification.error(this, 'Error', 'Something went wrong');
+                })
+        } 
     },
     computed: {
         ...mapGettersDashboardMoudle(['getIsLoggedIn', 'getMessage']),
@@ -162,12 +188,6 @@ export default {
                 this.$notification.error(this, 'Success', this.getMessage);
                 this.$localStorage.clear();
                 this.$router.push('/auth/login');
-            }
-        },
-        getSurveyList(data) {
-            if (data) {
-                console.log(data);
-                this.data = data
             }
         }
     }
