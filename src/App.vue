@@ -42,4 +42,8 @@ export default {};
         transform: scale(1.2, 0.7);
     }
 }
+
+.form-inline button {
+    margin-left: 5px;
+}
 </style>

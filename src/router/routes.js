@@ -13,6 +13,7 @@ import Icons from "@/pages/Icons.vue";
 // import TableList from "@/pages/TableList.vue";
 
 import userRoutes from './users';
+import surveyRoutes from './survey';
 
 const baseRoutes = [
     {
@@ -54,7 +55,8 @@ const baseRoutes = [
 ];
 
 const routes = baseRoutes.concat(
-    userRoutes
+    userRoutes,
+    surveyRoutes,
 );
 
 // const routes = [

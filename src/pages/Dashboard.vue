@@ -36,7 +36,6 @@
                                   :api-url="url"
                                   :http-options="headerOptions"
                                   :fields="fields"
-                                  :data="data"
                                   pagination-path
                                   @vuetable:pagination-data="onPaginationData">
                             <template slot="actions" slot-scope='props'>
@@ -67,8 +66,8 @@
 </template>
 <script>
 import Vuetable from "vuetable-2";
-import dateFormatMixins from '@/mixins/dateFormat';
 import { createNamespacedHelpers } from 'vuex';
+import dateFormatMixins from '@/mixins/dateFormat';
 import VuetableCssConfig from '@/components/Vuetable/VuetableCssConfig';
 import VuetablePagination from "vuetable-2/src/components/VuetablePagination";
 import VuetablePaginationInfo from "vuetable-2/src/components/VuetablePaginationInfo";
@@ -193,5 +192,3 @@ export default {
     }
 };
 </script>
-<style>
-</style>

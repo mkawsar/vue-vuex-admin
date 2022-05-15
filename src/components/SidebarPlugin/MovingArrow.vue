@@ -27,7 +27,7 @@ export default {
 $bg-nude: #f4f3ef !default;
 
 .moving-arrow {
-    border-right: 17px solid $bg-nude;
+    //border-right: 17px solid $bg-nude;
     border-top: 17px solid transparent;
     border-bottom: 17px solid transparent;
     display: inline-block;
