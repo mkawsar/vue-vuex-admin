@@ -34,7 +34,7 @@ export default {
         handleGetUserInfo({ commit }, user) {
             getRequest('api/v1/user/info')
             .then(res => {
-                console.log(res.data);
+                //console.log(res.data);
             })
             .catch(err => {
                 console.log(err);

@@ -18,7 +18,7 @@
                                 </form>
                             </div>
                             <div class="col-sm-6">
-                                <router-link :to="{name: 'GymLocationCreate'}" class="btn btn-outline btn-success pull-right">Add Survey</router-link>
+                                <router-link :to="{name: 'SurveyCreate'}" class="btn btn-outline btn-success pull-right">Add Survey</router-link>
                             </div>
                         </div>
                         <vuetable

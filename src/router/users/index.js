@@ -11,7 +11,7 @@ export default [
                 path: "profile",
                 name: "profile",
                 component: UserProfile,
-                meta: {title: 'User Profile', icon: 'ti-user', affix: true, requiresAuth: true, roles: ['admin']}
+                meta: {title: 'User Profile', icon: 'ti-user', affix: true, requiresAuth: true, roles: ['admin'], isNav: true}
             }
         ]
     },

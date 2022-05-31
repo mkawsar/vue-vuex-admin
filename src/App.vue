@@ -46,4 +46,8 @@ export default {};
 .form-inline button {
     margin-left: 5px;
 }
+.form-group.required .control-label:after {
+  content: " *";
+  color: #ff2603;
+}
 </style>

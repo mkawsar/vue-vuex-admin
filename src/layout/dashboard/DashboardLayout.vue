@@ -56,7 +56,7 @@ export default {
                 let routeRoles = route.meta;
                 if (routeRoles.hasOwnProperty('roles') && routeRoles['roles'] !== 'undefined') {
                     const intersection = roles.filter(element => routeRoles['roles'].indexOf(element) !== -1);
-                    if (intersection.length > 0) {
+                    if (intersection.length > 0 && route.meta.isNav === true) {
                         let obj = {};
                         obj.name = route.meta.title;
                         obj.icon = route.meta.icon;

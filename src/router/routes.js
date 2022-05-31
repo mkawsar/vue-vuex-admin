@@ -25,19 +25,19 @@ const baseRoutes = [
                 path: "dashboard",
                 name: "dashboard",
                 component: Dashboard,
-                meta: {title: 'Dasboard', icon: 'ti-panel', affix: true, requiresAuth: true, roles: ['user', 'manager']}
+                meta: {title: 'Dasboard', icon: 'ti-panel', affix: true, requiresAuth: true, roles: ['user', 'manager'], isNav: true}
             },
             {
                 path: "notifications",
                 name: "notifications",
                 component: Notifications,
-                meta: {title: 'Notifications', icon: 'ti-announcement', affix: true, requiresAuth: true, roles: ['user']}
+                meta: {title: 'Notifications', icon: 'ti-announcement', affix: true, requiresAuth: true, roles: ['user'], isNav: true}
             },
             {
                 path: "icons",
                 name: "icons",
                 component: Icons,
-                meta: {title: 'Icons', icon: 'ti-themify-favicon-alt', affix: true, requiresAuth: true, roles: ['admin']}
+                meta: {title: 'Icons', icon: 'ti-themify-favicon-alt', affix: true, requiresAuth: true, roles: ['admin'], isNav: true}
             },
         ]
     },
