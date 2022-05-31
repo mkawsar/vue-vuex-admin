@@ -3,7 +3,7 @@
         <div class="container-fluid">
             <div class="navbar-minimize">
                 <button class="btn btn-fill btn-icon" @click="minimizeSidebar">
-                    <i :class="$sidebar.isMinimized ? 'ti-menu-alt' : 'ti-more-alt'"></i>
+                    <i :class="$sidebar.showSidebar ? 'ti-menu-alt' : 'ti-more-alt'"></i>
                 </button>
             </div>
             <div class="navbar-header">
@@ -49,7 +49,8 @@ export default {
             this.$sidebar.displaySidebar(false);
         },
         minimizeSidebar () {
-            this.$sidebar.toggleMinimize(this.$store);
+            this.$sidebar.displaySidebar(!this.$sidebar.showSidebar)
+            //this.$sidebar.toggleMinimize(this.$store);
         }
     }
 };

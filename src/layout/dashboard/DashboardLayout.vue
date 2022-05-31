@@ -2,7 +2,12 @@
     <div class="wrapper">
         <side-bar>
             <template slot="links">
-                <sidebar-link v-for="(route, index) in routes" :key="`${index}`" :to="`${route.path}`" :name="`${route.name}`" :icon="`${route.icon}`"/>
+                <sidebar-link v-for="(route, index) in routes" 
+                    :key="`${index}`" 
+                    :to="`${route.path}`" 
+                    :name="`${route.name}`" 
+                    :icon="`${route.icon}`">
+                </sidebar-link>
                 <!-- <sidebar-link to="/stats" name="User Profile" icon="ti-user"/>
                 <sidebar-link to="/table-list" name="Table List" icon="ti-view-list-alt"/>
                 <sidebar-link to="/typography" name="Typography" icon="ti-text"/>
